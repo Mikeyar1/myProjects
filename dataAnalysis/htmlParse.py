@@ -30,8 +30,7 @@ def extract_article_details(soup):
             'url': None
         }
 
-        # Use try-except to extract each piece of information
-        try:
+=        try:
             article_data['title'] = article.find('h2').get_text(strip=True)
             article_data['publication_date'] = article.find('time').get_text(strip=True)
             article_data['author'] = article.find('p', class_='author').get_text(strip=True) if article.find('p', class_='author') else 'No author'
@@ -44,8 +43,8 @@ def extract_article_details(soup):
     
     return data
 
-# Example URL
-url = 'https://www.example.com/articles'
+#  URL
+url = 'https://www.desiringgod.org/articles/life-is-for-living'
 soup = fetch_and_parse(url)
 if soup:
     data = extract_article_details(soup)
