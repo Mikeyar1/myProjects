@@ -1,0 +1,10 @@
+import matplotlib.pyplot as plt
+
+# Plotting
+publication_frequency.plot(kind='bar')
+plt.xlabel('Date')
+plt.ylabel('Number of Articles')
+plt.title('Article Publication Frequency')
+plt.xticks(rotation=45)
+plt.tight_layout()  # Adjusts plot parameters to give some padding
+plt.show()
