@@ -1,10 +1,35 @@
 import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
 
-# Plotting
-publication_frequency.plot(kind='bar')
+# Assuming 'publication_frequency' is a Series with dates as index and counts as values
+# For demonstration, let's create a sample publication_frequency Series
+# publication_frequency = pd.Series([5, 3, 9], index=pd.to_datetime(['2021-01-01', '2021-01-02', '2021-01-03']))
+
+# Convert the index to datetime to ensure proper plotting
+publication_frequency.index = pd.to_datetime(publication_frequency.index)
+
+# Time Series Visualization
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=publication_frequency)
 plt.xlabel('Date')
 plt.ylabel('Number of Articles')
-plt.title('Article Publication Frequency')
+plt.title('Article Publication Frequency Over Time')
 plt.xticks(rotation=45)
-plt.tight_layout()  # Adjusts plot parameters to give some padding
+plt.tight_layout()
 plt.show()
+
+# Heatmap for Publication Frequency
+# Prepare data: count publications per day and pivot for heatmap
+frequency_pivot = publication_frequency.reset_index()
+frequency_pivot['day'] = frequency_pivot['index'].dt.day
+frequency_pivot['month'] = frequency_pivot['index'].dt.month
+frequency_pivot = frequency_pivot.pivot("day", "month", "publication_date")
+
+plt.figure(figsize=(12, 9))
+sns.heatmap(frequency_pivot, cmap="YlGnBu", annot=True, fmt="d")
+plt.title('Heatmap of Publication Frequency by Day and Month')
+plt.xlabel('Month')
+plt.ylabel('Day')
+plt.show()
+
