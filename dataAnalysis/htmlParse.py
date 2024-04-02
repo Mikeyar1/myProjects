@@ -21,7 +21,8 @@ def extract_article_details(soup):
     articles = soup.find_all('article')
     data = []
     for article in articles:
-        # Initialize dictionary for each article
+        
+        # Needs to be initialized
         article_data = {
             'title': None,
             'publication_date': None,
