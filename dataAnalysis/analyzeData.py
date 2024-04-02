@@ -2,18 +2,16 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Assuming 'data' is already populated from the enhanced web scraping script
+# data is already populated from the web scraping.
 df = pd.DataFrame(data)
 
-# Data Cleaning and Preparation
-## Convert publication dates to datetime and fill missing dates if any
+## Convert publication dates to datetime                                                                      
 df['publication_date'] = pd.to_datetime(df['publication_date'], errors='coerce')
 df.dropna(subset=['publication_date'], inplace=True)  # Drop rows where conversion failed
 
-## Fill missing titles, authors, and snippets with 'Unknown'
+## to fill
 df.fillna({'title': 'Unknown', 'author': 'Unknown', 'snippet': 'Unknown'}, inplace=True)
 
-# Extended Data Analysis
 ## Publication Frequency by Date
 publication_frequency = df['publication_date'].dt.date.value_counts().sort_index()
 
@@ -24,7 +22,6 @@ author_productivity = df['author'].value_counts()
 df['snippet_length'] = df['snippet'].apply(len)
 
 # Visualization
-## Publication Frequency Over Time
 plt.figure(figsize=(12, 6))
 publication_frequency.plot(kind='line')
 plt.title('Publication Frequency Over Time')
@@ -55,6 +52,6 @@ plt.savefig('snippet_length_distribution.png')
 plt.show()
 
 # Export Analyzed Data to CSV
-df.to_csv('analyzed_data.csv', index=False)
+df.to_csv('theAnalyzedData.csv', index=False)
 
-print("Data analysis completed and results exported.")
+print("Data analysis completed and results exported into an csv file.")
